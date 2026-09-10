@@ -37,14 +37,14 @@ namespace OpenMS
       @param[out] can_cross_link Output parameter for can_cross_link
       @param[out] default_marker_ions_RNA True for the explicit RNA default marker set, false for DNA
     */
-   void getPresets(const std::string& p, 
+   void getPresets(const std::string& p,
     const std::string& custom_presets_file,
-    StringList& nucleotides, 
-    StringList& mapping, 
-    StringList& modifications, 
-    StringList& fragment_adducts, 
+    StringList& nucleotides,
+    StringList& mapping,
+    StringList& modifications,
+    StringList& fragment_adducts,
     std::string& can_cross_link,
-    bool& default_marker_ions_RNA); 
+    bool& default_marker_ions_RNA);
 
     /**
       @brief Get preset parameters for a given preset name (using default presets file)
@@ -56,11 +56,11 @@ namespace OpenMS
       @param[out] can_cross_link Output parameter for can_cross_link
       @param[out] default_marker_ions_RNA True for the explicit RNA default marker set, false for DNA
     */
-    void getPresets(const std::string& p, 
-     StringList& nucleotides, 
-     StringList& mapping, 
-     StringList& modifications, 
-     StringList& fragment_adducts, 
+    void getPresets(const std::string& p,
+     StringList& nucleotides,
+     StringList& mapping,
+     StringList& modifications,
+     StringList& fragment_adducts,
      std::string& can_cross_link,
     bool& default_marker_ions_RNA);
   }

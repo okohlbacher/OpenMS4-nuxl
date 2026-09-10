@@ -123,7 +123,7 @@ START_SECTION((only exact bundled names permit legacy missing metadata and expli
   NEW_TMP_FILE(filename)
   {
     std::ofstream output(filename);
-    output << R"({"RNA-UV (U)":{},"DNA-UV":{},"RNA-custom":{},"bad":{"marker_ions":"unknown"},"null":{"marker_ions":null}})";
+    output << R"json({"RNA-UV (U)":{},"DNA-UV":{},"RNA-custom":{},"bad":{"marker_ions":"unknown"},"null":{"marker_ions":null}})json";
   }
   StringList nucleotides, mapping, modifications, fragments;
   std::string can_cross_link;
