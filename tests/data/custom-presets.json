@@ -1,5 +1,6 @@
 {
-  "RNA-CUSTOM-VALIDATION": {
+  "custom-protocol": {
+    "marker_ions": "RNA",
     "target_nucleotides": [
       "A=C10H14N5O7P",
       "C=C9H14N3O8P",

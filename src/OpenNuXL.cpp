@@ -911,7 +911,9 @@ protected:
       registerTOPPSubsection_(subsection_name, "Presets for " + p + " cross-link protocol (Note: changes will be ignored).");
       StringList target_nucleotides, mappings, modifications, fragment_adducts;
       std::string can_cross_link;
-      NuXLPresets::getPresets(p, custom_presets_file, target_nucleotides, mappings, modifications, fragment_adducts, can_cross_link);
+      bool default_marker_ions_RNA;
+      NuXLPresets::getPresets(p, custom_presets_file, target_nucleotides, mappings, modifications, fragment_adducts, can_cross_link, default_marker_ions_RNA);
+      registerStringOption_(subsection_name + ":marker_ions", "", default_marker_ions_RNA ? "RNA" : "DNA", "Default marker ion set", false, true);
 
       registerStringList_(subsection_name + ":target_nucleotides", "", target_nucleotides, "", false, true);
       registerStringList_(subsection_name + ":mapping", "", mappings, "", false, true);
@@ -5142,7 +5144,7 @@ static void scoreXLIons_(
       std::string custom_presets_file = getStringOption_("NuXL:presets_file");
       try
       {
-        NuXLPresets::getPresets(p, custom_presets_file, target_nucleotides, mappings, modifications, fragment_adducts, can_cross_link);
+        NuXLPresets::getPresets(p, custom_presets_file, target_nucleotides, mappings, modifications, fragment_adducts, can_cross_link, isRNA);
       }
       catch (const std::runtime_error& error)
       {
@@ -5150,15 +5152,7 @@ static void scoreXLIons_(
         return ILLEGAL_PARAMETERS;
       }
       
-      // set if DNA or RNA preset
-      if (StringUtils::hasSubstring(p, "RNA"))
-      {      
-        isRNA = true;
-      }
-      else if (StringUtils::hasSubstring(p, "DNA"))
-      {
-        isRNA = false;
-      }
+
     }
     // convert string to set
     for (const auto& c : can_cross_link) { can_xl_.insert(c); } // sort and make unique

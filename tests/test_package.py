@@ -46,6 +46,8 @@ class PackageContract(unittest.TestCase):
         self.assertEqual(len(presets), 25)
         self.assertEqual(presets['RNA-UV (U)']['can_cross_link'], 'U')
         self.assertEqual(presets['none']['target_nucleotides'], [])
+        for name, preset in presets.items():
+            self.assertEqual(preset['marker_ions'], 'RNA' if name.startswith('RNA-') else 'DNA')
         source = (PACKAGE / 'source/NuXLPresets.cpp').read_text()
         self.assertNotIn('getOpenMSDataPath', source)
         self.assertIn('File::getExecutablePath()', source)

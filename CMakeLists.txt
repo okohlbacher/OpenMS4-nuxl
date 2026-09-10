@@ -98,7 +98,7 @@ if(BUILD_TESTING AND OPENMS4_REGRESSION_TESTS)
     -out ${CMAKE_CURRENT_BINARY_DIR}/NuXL_custom_fixture.idXML
     -NuXL:decoys false
     -NuXL:presets_file ${CMAKE_CURRENT_SOURCE_DIR}/tests/data/custom-presets.json
-    -NuXL:presets RNA-CUSTOM-VALIDATION)
+    -NuXL:presets custom-protocol)
   add_test(NAME NuXL_custom_preset_localized_adducts COMMAND ${CMAKE_COMMAND}
     -DINPUT_FILE=${CMAKE_CURRENT_BINARY_DIR}/NuXL_custom_fixture.idXML
     -P ${OpenMSTestData_TOPP_DIR}/OpenNuXL_adduct_in_sequence_test.cmake)
@@ -109,6 +109,12 @@ if(BUILD_TESTING AND OPENMS4_REGRESSION_TESTS)
     -DEXPECTED_EXIT_CODE=6
     "-DEXPECTED_DIAGNOSTICS=Error: unknown preset 'RNA-MISSING-PRESET'"
     -P ${OpenMSTestData_REGRESSION_SOURCE_DIR}/cmake/ExpectToolFailure.cmake)
-  set_tests_properties(NuXL_custom_preset_search NuXL_custom_preset_unknown_name PROPERTIES
+  add_test(NAME NuXL_custom_preset_missing_marker_ions COMMAND ${CMAKE_COMMAND}
+    "-DTOOL_EXECUTABLE=$<TARGET_FILE:OpenNuXL>"
+    "-DTOOL_ARGUMENTS=-test;-threads;1;-in;${OpenMSTestData_TOPP_DIR}/OpenNuXL_1_input.mzML;-database;${OpenMSTestData_TOPP_DIR}/OpenNuXL_1_input.fasta;-out;${CMAKE_CURRENT_BINARY_DIR}/NuXL_invalid_markers.idXML;-NuXL:presets_file;${CMAKE_CURRENT_SOURCE_DIR}/tests/data/invalid-marker-presets.json;-NuXL:presets;neutral-key"
+    -DEXPECTED_EXIT_CODE=6
+    "-DEXPECTED_DIAGNOSTICS=Preset 'neutral-key' requires marker_ions set to 'RNA' or 'DNA'"
+    -P ${OpenMSTestData_REGRESSION_SOURCE_DIR}/cmake/ExpectToolFailure.cmake)
+  set_tests_properties(NuXL_custom_preset_search NuXL_custom_preset_unknown_name NuXL_custom_preset_missing_marker_ions PROPERTIES
     ENVIRONMENT "OPENMS_TOOL_PREFIX_PATH=${CMAKE_BINARY_DIR};OPENMS_DISABLE_UPDATE_CHECK=ON")
 endif()

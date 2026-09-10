@@ -1,5 +1,6 @@
 {
   "RNA-UV (U)": {
+    "marker_ions": "RNA",
     "target_nucleotides": ["A=C10H14N5O7P", "C=C9H14N3O8P", "G=C10H14N5O8P", "U=C9H13N2O9P"],
     "mapping": ["A->A", "C->C", "G->G", "U->U"],
     "can_cross_link": "U",
@@ -58,6 +59,7 @@
     ]
   },
   "RNA-UV (UCGA)": {
+    "marker_ions": "RNA",
     "target_nucleotides": ["A=C10H14N5O7P", "C=C9H14N3O8P", "G=C10H14N5O8P", "U=C9H13N2O9P"],
     "mapping": ["A->A", "C->C", "G->G", "U->U"],
     "can_cross_link": "UCGA",
@@ -116,6 +118,7 @@
     ]
   },
   "RNA-UV Extended (U)": {
+    "marker_ions": "RNA",
     "target_nucleotides": ["A=C10H14N5O7P", "C=C9H14N3O8P", "G=C10H14N5O8P", "U=C9H13N2O9P"],
     "mapping": ["A->A", "C->C", "G->G", "U->U"],
     "can_cross_link": "U",
@@ -193,6 +196,7 @@
     ]
   },
   "RNA-UV Extended (UCGA)": {
+    "marker_ions": "RNA",
     "target_nucleotides": ["A=C10H14N5O7P", "C=C9H14N3O8P", "G=C10H14N5O8P", "U=C9H13N2O9P"],
     "mapping": ["A->A", "C->C", "G->G", "U->U"],
     "can_cross_link": "UCGA",
@@ -270,6 +274,7 @@
     ]
   },
   "RNA-UV (4SU)": {
+    "marker_ions": "RNA",
     "target_nucleotides": ["A=C10H14N5O7P", "C=C9H14N3O8P", "G=C10H14N5O8P", "U=C9H13N2O9P", "S=C9H13N2O8PS"],
     "mapping": ["A->A", "C->C", "G->G", "U->U", "S->S"],
     "can_cross_link": "S",
@@ -326,6 +331,7 @@
     ]
   },
   "RNA-UV Extended (4SU)": {
+    "marker_ions": "RNA",
     "target_nucleotides": ["A=C10H14N5O7P", "C=C9H14N3O8P", "G=C10H14N5O8P", "U=C9H13N2O9P", "S=C9H13N2O8PS"],
     "mapping": ["A->A", "C->C", "G->G", "U->U", "S->S"],
     "can_cross_link": "S",
@@ -390,6 +396,7 @@
     ]
   },
   "RNA-UV (6SG)": {
+    "marker_ions": "RNA",
     "target_nucleotides": ["A=C10H14N5O7P", "C=C9H14N3O8P", "G=C10H14N5O8P", "U=C9H13N2O9P", "X=C10H14N5O7PS"],
     "mapping": ["A->A", "C->C", "G->G", "U->U", "X->X"],
     "can_cross_link": "X",
@@ -446,6 +453,7 @@
     ]
   },
   "RNA-UV Extended (6SG)": {
+    "marker_ions": "RNA",
     "target_nucleotides": ["A=C10H14N5O7P", "C=C9H14N3O8P", "G=C10H14N5O8P", "U=C9H13N2O9P", "X=C10H14N5O7PS"],
     "mapping": ["A->A", "C->C", "G->G", "U->U", "X->X"],
     "can_cross_link": "X",
@@ -507,6 +515,7 @@
     ]
   },
   "DNA-UV": {
+    "marker_ions": "DNA",
     "target_nucleotides": ["A=C10H14N5O6P", "C=C9H14N3O7P", "G=C10H14N5O7P", "T=C10H15N2O8P", "d=C5H9O6P"],
     "mapping": ["A->A", "C->C", "G->G", "T->T", "d->d"],
     "can_cross_link": "TCGAd",
@@ -570,6 +579,7 @@
     ]
   },
   "DNA-UV Extended": {
+    "marker_ions": "DNA",
     "target_nucleotides": ["A=C10H14N5O6P", "C=C9H14N3O7P", "G=C10H14N5O7P", "T=C10H15N2O8P", "d=C5H9O6P"],
     "mapping": ["A->A", "C->C", "G->G", "T->T", "d->d"],
     "can_cross_link": "TCGAd",
@@ -653,6 +663,7 @@
     ]
   },
   "DNA-UV (BrU)": {
+    "marker_ions": "DNA",
     "target_nucleotides": ["A=C10H14N5O6P", "C=C9H14N3O7P", "G=C10H14N5O7P", "T=C10H15N2O8P", "B=C9H11N2O8P", "d=C5H9O6P"],
     "mapping": ["A->A", "C->C", "G->G", "T->T", "B->B", "d->d"],
     "can_cross_link": "B",
@@ -724,6 +735,7 @@
     ]
   },
   "RNA-DEB": {
+    "marker_ions": "RNA",
     "target_nucleotides": ["A=C10H14N5O7P", "C=C9H14N3O8P", "G=C10H14N5O8P", "U=C9H13N2O9P"],
     "mapping": ["A->A", "C->C", "G->G", "U->U"],
     "can_cross_link": "UCGA",
@@ -784,6 +796,7 @@
     ]
   },
   "RNA-DEB Extended": {
+    "marker_ions": "RNA",
     "target_nucleotides": ["A=C10H14N5O7P", "C=C9H14N3O8P", "G=C10H14N5O8P", "U=C9H13N2O9P"],
     "mapping": ["A->A", "C->C", "G->G", "U->U"],
     "can_cross_link": "UCGA",
@@ -874,6 +887,7 @@
     ]
   },
   "DNA-DEB": {
+    "marker_ions": "DNA",
     "target_nucleotides": ["A=C10H14N5O6P", "C=C9H14N3O7P", "G=C10H14N5O7P", "T=C10H15N2O8P", "d=C5H9O6P"],
     "mapping": ["A->A", "C->C", "G->G", "T->T", "d->d"],
     "can_cross_link": "TCGAd",
@@ -939,6 +953,7 @@
     ]
   },
   "DNA-DEB Extended": {
+    "marker_ions": "DNA",
     "target_nucleotides": ["A=C10H14N5O6P", "C=C9H14N3O7P", "G=C10H14N5O7P", "T=C10H15N2O8P", "d=C5H9O6P"],
     "mapping": ["A->A", "C->C", "G->G", "T->T", "d->d"],
     "can_cross_link": "TCGAd",
@@ -1036,6 +1051,7 @@
     ]
   },
   "DNA-NM": {
+    "marker_ions": "DNA",
     "target_nucleotides": ["A=C10H14N5O6P", "C=C9H14N3O7P", "G=C10H14N5O7P", "T=C10H15N2O8P", "d=C5H9O6P"],
     "mapping": ["A->A", "C->C", "G->G", "T->T", "d->d"],
     "can_cross_link": "TCGAd",
@@ -1097,6 +1113,7 @@
     ]
   },
   "DNA-NM Extended": {
+    "marker_ions": "DNA",
     "target_nucleotides": ["A=C10H14N5O6P", "C=C9H14N3O7P", "G=C10H14N5O7P", "T=C10H15N2O8P", "d=C5H9O6P"],
     "mapping": ["A->A", "C->C", "G->G", "T->T", "d->d"],
     "can_cross_link": "TCGAd",
@@ -1190,6 +1207,7 @@
     ]
   },
   "RNA-NM": {
+    "marker_ions": "RNA",
     "target_nucleotides": ["A=C10H14N5O7P", "C=C9H14N3O8P", "G=C10H14N5O8P", "U=C9H13N2O9P"],
     "mapping": ["A->A", "C->C", "G->G", "U->U"],
     "can_cross_link": "UCGA",
@@ -1246,6 +1264,7 @@
     ]
   },
   "RNA-NM Extended": {
+    "marker_ions": "RNA",
     "target_nucleotides": ["A=C10H14N5O7P", "C=C9H14N3O8P", "G=C10H14N5O8P", "U=C9H13N2O9P"],
     "mapping": ["A->A", "C->C", "G->G", "U->U"],
     "can_cross_link": "UCGA",
@@ -1332,6 +1351,7 @@
     ]
   },
   "RNA-NM Extended (+H2O)": {
+    "marker_ions": "RNA",
     "target_nucleotides": ["A=C10H14N5O7P", "C=C9H14N3O8P", "G=C10H14N5O8P", "U=C9H13N2O9P"],
     "mapping": ["A->A", "C->C", "G->G", "U->U"],
     "can_cross_link": "UCGA",
@@ -1424,6 +1444,7 @@
     ]
   },
   "RNA-FA": {
+    "marker_ions": "RNA",
     "target_nucleotides": ["A=C10H14N5O7P", "C=C9H14N3O8P", "G=C10H14N5O8P", "U=C9H13N2O9P"],
     "mapping": ["A->A", "C->C", "G->G", "U->U"],
     "can_cross_link": "CGA",
@@ -1491,6 +1512,7 @@
     ]
   },
   "RNA-FA Extended": {
+    "marker_ions": "RNA",
     "target_nucleotides": ["A=C10H14N5O7P", "C=C9H14N3O8P", "G=C10H14N5O8P", "U=C9H13N2O9P"],
     "mapping": ["A->A", "C->C", "G->G", "U->U"],
     "can_cross_link": "CGA",
@@ -1570,6 +1592,7 @@
     ]
   },
   "DNA-FA": {
+    "marker_ions": "DNA",
     "target_nucleotides": ["A=C10H14N5O6P", "C=C9H14N3O7P", "G=C10H14N5O7P", "T=C10H15N2O8P", "d=C5H9O6P"],
     "mapping": ["A->A", "C->C", "G->G", "T->T", "d->d"],
     "can_cross_link": "CGAd",
@@ -1644,6 +1667,7 @@
     ]
   },
   "DNA-FA Extended": {
+    "marker_ions": "DNA",
     "target_nucleotides": ["A=C10H14N5O6P", "C=C9H14N3O7P", "G=C10H14N5O7P", "T=C10H15N2O8P", "d=C5H9O6P"],
     "mapping": ["A->A", "C->C", "G->G", "T->T", "d->d"],
     "can_cross_link": "CGAd",
@@ -1730,6 +1754,7 @@
     ]
   },
   "none": {
+    "marker_ions": "DNA",
     "target_nucleotides": [],
     "mapping": [],
     "can_cross_link": "",

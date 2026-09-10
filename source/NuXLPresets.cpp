@@ -85,7 +85,8 @@ namespace OpenMS
       StringList& mapping, 
       StringList& modifications, 
       StringList& fragment_adducts, 
-      std::string& can_cross_link)
+      std::string& can_cross_link,
+      bool& default_marker_ions_RNA)
     {
       StringList presets = getAllPresetsNames(custom_presets_file);
       OPENMS_LOG_INFO << "Found presets: " << presets.size() << std::endl;
@@ -115,6 +116,25 @@ namespace OpenMS
           if (j.contains(p.c_str()))
           {
             const auto& preset = j[p.c_str()];
+
+            // Preset names are display labels, not a reliable chemical contract.
+            // Preserve old custom files only for an exact bundled preset key.
+            json marker_ions = preset.value("marker_ions", json());
+            if (marker_ions.is_null() && !custom_presets_file.empty() && !preset.contains("marker_ions"))
+            {
+              std::ifstream bundled_file{std::filesystem::u8path(presetsPath(""))};
+              json bundled;
+              bundled_file >> bundled;
+              if (bundled.contains(p))
+              {
+                marker_ions = bundled.at(p).value("marker_ions", json());
+              }
+            }
+            if (!marker_ions.is_string() || (marker_ions != "RNA" && marker_ions != "DNA"))
+            {
+              throw std::runtime_error("Preset '" + p + "' requires marker_ions set to 'RNA' or 'DNA'.");
+            }
+            default_marker_ions_RNA = marker_ions == "RNA";
             
             // Load nucleotides
             if (preset.contains("target_nucleotides"))
@@ -179,7 +199,7 @@ namespace OpenMS
         {
           // If there's an error reading the JSON file, throw an error
           OPENMS_LOG_WARN << "Error reading presets from " << json_path << ": " << e.what() << std::endl;
-          throw std::runtime_error("Error reading presets.");
+          throw std::runtime_error(std::string("Error reading presets: ") + e.what());
         }
       }
       else
@@ -194,9 +214,10 @@ namespace OpenMS
       StringList& mapping, 
       StringList& modifications, 
       StringList& fragment_adducts, 
-      std::string& can_cross_link)
+      std::string& can_cross_link,
+      bool& default_marker_ions_RNA)
     {
-      getPresets(p, "", nucleotides, mapping, modifications, fragment_adducts, can_cross_link);
+      getPresets(p, "", nucleotides, mapping, modifications, fragment_adducts, can_cross_link, default_marker_ions_RNA);
     }
   }
 }

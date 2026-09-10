@@ -169,7 +169,9 @@ START_SECTION((static PrecursorsToMS2Adducts getAllFeasibleFragmentAdducts(const
   // string format:  source->target e.g. "A->A", ..., "U->U", "U->X"
   StringList mappings;
 
-  NuXLPresets::getPresets("RNA-UV (U)", target_nucleotides, mappings, modifications, fragment_adducts, can_cross_link);
+  bool default_marker_ions_RNA;
+  NuXLPresets::getPresets("RNA-UV (U)", target_nucleotides, mappings, modifications, fragment_adducts, can_cross_link, default_marker_ions_RNA);
+  TEST_TRUE(default_marker_ions_RNA)
 
   // test preset strings
   TEST_EQUAL(target_nucleotides.size(), 4)
