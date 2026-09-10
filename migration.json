@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "package": "OpenMSNuXL",
+  "source_revisions": {
+    "core": "4fdec46b205459b92e7d3b9e56df5d8e912d5c85",
+    "topp": "582535805581f2bdf4f3871d6802a0b45a3abe36"
+  },
+  "moved": [
+    {
+      "old_path": "packages/core/src/openms/include/OpenMS/ANALYSIS/NUXL/NuXLAnnotateAndLocate.h",
+      "new_path": "include/OpenMS/ANALYSIS/NUXL/NuXLAnnotateAndLocate.h",
+      "sha256_before": "abf862c688388c1a6c1d582ac46f95d7de116c4b18c944697a216af87d275ce0"
+    },
+    {
+      "old_path": "packages/core/src/openms/include/OpenMS/ANALYSIS/NUXL/NuXLAnnotatedHit.h",
+      "new_path": "include/OpenMS/ANALYSIS/NUXL/NuXLAnnotatedHit.h",
+      "sha256_before": "9200b0b17a546811ebf75c19a25b55b2f52e3e9ff12609279233e547c985b0c6"
+    },
+    {
+      "old_path": "packages/core/src/openms/include/OpenMS/ANALYSIS/NUXL/NuXLConstants.h",
+      "new_path": "include/OpenMS/ANALYSIS/NUXL/NuXLConstants.h",
+      "sha256_before": "b719f3f9379d2a550d0cb3e154da3a77b3fdc0d68a30c3de37cd95ffe6209003"
+    },
+    {
+      "old_path": "packages/core/src/openms/include/OpenMS/ANALYSIS/NUXL/NuXLDeisotoper.h",
+      "new_path": "include/OpenMS/ANALYSIS/NUXL/NuXLDeisotoper.h",
+      "sha256_before": "3f8d9a870a2fe5c70dc5bfab4e2942b0d07f286710e2a02021cc34d731e8248f"
+    },
+    {
+      "old_path": "packages/core/src/openms/include/OpenMS/ANALYSIS/NUXL/NuXLFDR.h",
+      "new_path": "include/OpenMS/ANALYSIS/NUXL/NuXLFDR.h",
+      "sha256_before": "c2b17eae2039099ff4f3607ffbfe77e3d4bca3be7e5dfc7b48dc7ffea156e7bd"
+    },
+    {
+      "old_path": "packages/core/src/openms/include/OpenMS/ANALYSIS/NUXL/NuXLFragmentAdductDefinition.h",
+      "new_path": "include/OpenMS/ANALYSIS/NUXL/NuXLFragmentAdductDefinition.h",
+      "sha256_before": "53781846c63b4741c6db0c9d249afdffd1efcd708344119379d767f3a24cdcbb"
+    },
+    {
+      "old_path": "packages/core/src/openms/include/OpenMS/ANALYSIS/NUXL/NuXLFragmentAnnotationHelper.h",
+      "new_path": "include/OpenMS/ANALYSIS/NUXL/NuXLFragmentAnnotationHelper.h",
+      "sha256_before": "8b85ad0d34eb90741f68c0bf0fd8c198a3ff5339d930988bc1797cd5751f7d28"
+    },
+    {
+      "old_path": "packages/core/src/openms/include/OpenMS/ANALYSIS/NUXL/NuXLFragmentIonGenerator.h",
+      "new_path": "include/OpenMS/ANALYSIS/NUXL/NuXLFragmentIonGenerator.h",
+      "sha256_before": "6890a0f0887da0153072023d2b29050ddceff9d1b88713b9bd0655cb20c47e2a"
+    },
+    {
+      "old_path": "packages/core/src/openms/include/OpenMS/ANALYSIS/NUXL/NuXLModificationsGenerator.h",
+      "new_path": "include/OpenMS/ANALYSIS/NUXL/NuXLModificationsGenerator.h",
+      "sha256_before": "03cc6082cc1755ecd155f0a124aca575bb7639b3d6037e6b3d608c1383fb76e0"
+    },
+    {
+      "old_path": "packages/core/src/openms/include/OpenMS/ANALYSIS/NUXL/NuXLParameterParsing.h",
+      "new_path": "include/OpenMS/ANALYSIS/NUXL/NuXLParameterParsing.h",
+      "sha256_before": "390bd503437e4703ec00a601d75766b26e6d71a821eaa070ba382d0669354525"
+    },
+    {
+      "old_path": "packages/core/src/openms/include/OpenMS/ANALYSIS/NUXL/NuXLPresets.h",
+      "new_path": "include/OpenMS/ANALYSIS/NUXL/NuXLPresets.h",
+      "sha256_before": "a608759727bcec787e4bda4fbc4f14137d4488f3d0e0d2f420a3bf60461b6eba"
+    },
+    {
+      "old_path": "packages/core/src/openms/source/ANALYSIS/NUXL/NuXLAnnotateAndLocate.cpp",
+      "new_path": "source/NuXLAnnotateAndLocate.cpp",
+      "sha256_before": "dedf7e77d898aaeb034197ba8060c867ced776c6834ca8d75c9f9582ffd52e05"
+    },
+    {
+      "old_path": "packages/core/src/openms/source/ANALYSIS/NUXL/NuXLDeisotoper.cpp",
+      "new_path": "source/NuXLDeisotoper.cpp",
+      "sha256_before": "679f1e25e07911545866244826ffc1b799dc13505e42ab605618f00e0a3d4650"
+    },
+    {
+      "old_path": "packages/core/src/openms/source/ANALYSIS/NUXL/NuXLFDR.cpp",
+      "new_path": "source/NuXLFDR.cpp",
+      "sha256_before": "9cc0d4141024c34259ac1473d2df191fdf8642fc4d7d89a353b3fe0417354e09"
+    },
+    {
+      "old_path": "packages/core/src/openms/source/ANALYSIS/NUXL/NuXLFragmentAdductDefinition.cpp",
+      "new_path": "source/NuXLFragmentAdductDefinition.cpp",
+      "sha256_before": "024c344dd147cb1a5d081e17b6e27e18c4c3433d1e8139cab9f2e3ba3f10dc57"
+    },
+    {
+      "old_path": "packages/core/src/openms/source/ANALYSIS/NUXL/NuXLFragmentAnnotationHelper.cpp",
+      "new_path": "source/NuXLFragmentAnnotationHelper.cpp",
+      "sha256_before": "34c5e8671d6c8b37a0eb38263e0a997b92d7fbfbeefe6c8a6a145d5e67958b7a"
+    },
+    {
+      "old_path": "packages/core/src/openms/source/ANALYSIS/NUXL/NuXLFragmentIonGenerator.cpp",
+      "new_path": "source/NuXLFragmentIonGenerator.cpp",
+      "sha256_before": "fa54e2f265f29fbc1a819f0fa09a57a61d54c2c6ddb483eb468652eb1d6c2657"
+    },
+    {
+      "old_path": "packages/core/src/openms/source/ANALYSIS/NUXL/NuXLModificationsGenerator.cpp",
+      "new_path": "source/NuXLModificationsGenerator.cpp",
+      "sha256_before": "3ba32a1aa13c5c02d6388fb9aa80bb222c32e795c8d4b39ca78891e663fca0fc"
+    },
+    {
+      "old_path": "packages/core/src/openms/source/ANALYSIS/NUXL/NuXLParameterParsing.cpp",
+      "new_path": "source/NuXLParameterParsing.cpp",
+      "sha256_before": "780e2ace7e0092d9d50714259cea9eafda4552e00ffb3ec311f52a71d738f2c7"
+    },
+    {
+      "old_path": "packages/core/src/openms/source/ANALYSIS/NUXL/NuXLPresets.cpp",
+      "new_path": "source/NuXLPresets.cpp",
+      "sha256_before": "2770c2c280ef28cc29c907446a59b6a0f0e58107b457fe56b7033638f6591b37"
+    },
+    {
+      "old_path": "packages/core/src/tests/class_tests/openms/source/NuXLFragmentAdductDefinition_test.cpp",
+      "new_path": "tests/NuXLFragmentAdductDefinition_test.cpp",
+      "sha256_before": "646e1a1b64e949883abf2bf0ddaaea9ab2d6190864ec1c9df074bc4f721944a4"
+    },
+    {
+      "old_path": "packages/core/src/tests/class_tests/openms/source/NuXLModificationsGenerator_test.cpp",
+      "new_path": "tests/NuXLModificationsGenerator_test.cpp",
+      "sha256_before": "4ac3e7d09c4231ac2389b343824a9c244d45b40e5f0ac62e852866936066693c"
+    },
+    {
+      "old_path": "packages/core/src/tests/class_tests/openms/source/NuXLParameterParsing_test.cpp",
+      "new_path": "tests/NuXLParameterParsing_test.cpp",
+      "sha256_before": "8cd9a842b62309c594fd364c38ca85e154844e5f5b3f44e02d5b4b1879880147"
+    }
+  ],
+  "copied_pending_original_removal": [
+    {
+      "old_path": "packages/topp/src/OpenNuXL.cpp",
+      "new_path": "src/OpenNuXL.cpp",
+      "sha256_before": "7da228a76945ac032d64188c83c9bf45bb0fbe9691c279da4b6d95de4de2f944"
+    }
+  ],
+  "retained_in_core": [
+    "src/openms/include/OpenMS/ANALYSIS/NUXL/NuXLReport.h",
+    "src/openms/source/ANALYSIS/NUXL/NuXLReport.cpp",
+    "src/openms/include/OpenMS/ANALYSIS/NUXL/NuXLMarkerIonExtractor.h",
+    "src/openms/source/ANALYSIS/NUXL/NuXLMarkerIonExtractor.cpp"
+  ],
+  "class_tests_moved": [
+    "NuXLFragmentAdductDefinition_test",
+    "NuXLModificationsGenerator_test",
+    "NuXLParameterParsing_test"
+  ],
+  "runtime_resources": [
+    {
+      "old_path": "packages/core/share/OpenMS/NUXL/README.md",
+      "new_path": "share/openms4/nuxl/README.md",
+      "sha256_before": "2b16c27367628fa4ac40e6cdb9aaecac88d03a7fec749da76deb751bd8b69f0f"
+    },
+    {
+      "old_path": "packages/core/share/OpenMS/NUXL/nuxl_presets.json",
+      "new_path": "share/openms4/nuxl/nuxl_presets.json",
+      "sha256_before": "740965b7f3dca96dedd27a91ff504648e006c42f5243e4c54cc7f862c58b4b45"
+    }
+  ],
+  "retained_core_test": "src/tests/class_tests/openms/source/NuXLReport_test.cpp",
+  "fixtures": "The three moved class tests construct data in memory and do not use class-test data files. Package scientific tests consume installed OpenMSTestData TOPP fixtures; generic format round-trip fixtures remain there."
+}

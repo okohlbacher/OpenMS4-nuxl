@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "dependencies": {
+    "OpenMS": {
+      "version": "4.0.0",
+      "source_revision": "ea35651d2fa4700a59beae1f3d1b733fb7bdaa9c",
+      "repository": "https://github.com/okohlbacher/OpenMS4-core"
+    },
+    "OpenMSCLI": {
+      "version": "1.0.0",
+      "source_revision": "72749eadb3b5b169630374816890902ec4e4551c",
+      "repository": "https://github.com/okohlbacher/OpenMS4-cli"
+    },
+    "OpenMSTestData": {
+      "version": "1.0.0",
+      "source_revision": "ea8679468c0373eebca8e5b449b6557d6e0771dc",
+      "repository": "https://github.com/okohlbacher/OpenMS4-test-data"
+    }
+  },
+  "binary_artifacts": "Source pins and clean build metadata are enforced; see the parent implementation validation report for tested binary profiles."
+}

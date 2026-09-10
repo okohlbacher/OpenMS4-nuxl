@@ -1,0 +1,10 @@
+{
+  "package": "OpenMSNuXL",
+  "version": "1.0.0",
+  "tools": [
+    {
+      "name": "OpenNuXL",
+      "category": "Cross-Linking"
+    }
+  ]
+}
