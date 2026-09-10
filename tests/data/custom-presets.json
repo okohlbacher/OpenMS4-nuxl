@@ -1,0 +1,32 @@
+{
+  "RNA-CUSTOM-VALIDATION": {
+    "target_nucleotides": [
+      "A=C10H14N5O7P",
+      "C=C9H14N3O8P",
+      "G=C10H14N5O8P",
+      "U=C9H13N2O9P"
+    ],
+    "mapping": [
+      "A->A",
+      "C->C",
+      "G->G",
+      "U->U"
+    ],
+    "can_cross_link": "U",
+    "modifications": [
+      "U:",
+      "U:-H2O",
+      "U:-HPO3",
+      "U:-H3PO4"
+    ],
+    "fragment_adducts": [
+      "U:C9H10N2O5;U-H3PO4",
+      "U:C4H4N2O2;U'",
+      "U:C4H2N2O1;U'-H2O",
+      "U:C3O;C3O",
+      "U:C9H13N2O9P1;U",
+      "U:C9H11N2O8P1;U-H2O",
+      "U:C9H12N2O6;U-HPO3"
+    ]
+  }
+}

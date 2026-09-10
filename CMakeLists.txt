@@ -91,4 +91,24 @@ if(BUILD_TESTING AND OPENMS4_REGRESSION_TESTS)
   set_tests_properties(NuXL_search_localized_adducts PROPERTIES DEPENDS NuXL_search_fixture)
   set_tests_properties(NuXL_search_fixture PROPERTIES
     ENVIRONMENT "OPENMS_TOOL_PREFIX_PATH=${CMAKE_BINARY_DIR};OPENMS_DISABLE_UPDATE_CHECK=ON")
+  add_test(NAME NuXL_custom_preset_search COMMAND OpenNuXL -test -threads 1
+    -precursor:mass_tolerance 10.0
+    -in ${OpenMSTestData_TOPP_DIR}/OpenNuXL_1_input.mzML
+    -database ${OpenMSTestData_TOPP_DIR}/OpenNuXL_1_input.fasta
+    -out ${CMAKE_CURRENT_BINARY_DIR}/NuXL_custom_fixture.idXML
+    -NuXL:decoys false
+    -NuXL:presets_file ${CMAKE_CURRENT_SOURCE_DIR}/tests/data/custom-presets.json
+    -NuXL:presets RNA-CUSTOM-VALIDATION)
+  add_test(NAME NuXL_custom_preset_localized_adducts COMMAND ${CMAKE_COMMAND}
+    -DINPUT_FILE=${CMAKE_CURRENT_BINARY_DIR}/NuXL_custom_fixture.idXML
+    -P ${OpenMSTestData_TOPP_DIR}/OpenNuXL_adduct_in_sequence_test.cmake)
+  set_tests_properties(NuXL_custom_preset_localized_adducts PROPERTIES DEPENDS NuXL_custom_preset_search)
+  add_test(NAME NuXL_custom_preset_unknown_name COMMAND ${CMAKE_COMMAND}
+    "-DTOOL_EXECUTABLE=$<TARGET_FILE:OpenNuXL>"
+    "-DTOOL_ARGUMENTS=-test;-threads;1;-in;${OpenMSTestData_TOPP_DIR}/OpenNuXL_1_input.mzML;-database;${OpenMSTestData_TOPP_DIR}/OpenNuXL_1_input.fasta;-out;${CMAKE_CURRENT_BINARY_DIR}/NuXL_invalid_preset.idXML;-NuXL:presets_file;${CMAKE_CURRENT_SOURCE_DIR}/tests/data/custom-presets.json;-NuXL:presets;RNA-MISSING-PRESET"
+    -DEXPECTED_EXIT_CODE=6
+    "-DEXPECTED_DIAGNOSTICS=Error: unknown preset 'RNA-MISSING-PRESET'"
+    -P ${OpenMSTestData_REGRESSION_SOURCE_DIR}/cmake/ExpectToolFailure.cmake)
+  set_tests_properties(NuXL_custom_preset_search NuXL_custom_preset_unknown_name PROPERTIES
+    ENVIRONMENT "OPENMS_TOOL_PREFIX_PATH=${CMAKE_BINARY_DIR};OPENMS_DISABLE_UPDATE_CHECK=ON")
 endif()

@@ -900,7 +900,8 @@ protected:
     // append StringLists
     std::string custom_presets_file = getStringOption_("NuXL:presets_file");
     StringList all_presets = NuXLPresets::getAllPresetsNames(custom_presets_file);
-    setValidStrings_("NuXL:presets", all_presets);
+    // Registration precedes command-line/INI parsing. Validate the selected name
+    // in getPresets() after its actual custom file is known, not against defaults.
 
     // store presets (for visual inspection only) in ini
     for (const auto& p : all_presets)
@@ -5139,7 +5140,15 @@ static void scoreXLIons_(
     { // set from presets
       std::string p = getStringOption_("NuXL:presets");
       std::string custom_presets_file = getStringOption_("NuXL:presets_file");
-      NuXLPresets::getPresets(p, custom_presets_file, target_nucleotides, mappings, modifications, fragment_adducts, can_cross_link);
+      try
+      {
+        NuXLPresets::getPresets(p, custom_presets_file, target_nucleotides, mappings, modifications, fragment_adducts, can_cross_link);
+      }
+      catch (const std::runtime_error& error)
+      {
+        OPENMS_LOG_ERROR << error.what() << '\n';
+        return ILLEGAL_PARAMETERS;
+      }
       
       // set if DNA or RNA preset
       if (StringUtils::hasSubstring(p, "RNA"))
