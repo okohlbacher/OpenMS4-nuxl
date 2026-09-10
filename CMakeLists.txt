@@ -47,22 +47,9 @@ target_link_libraries(nuxl_backend PUBLIC OpenMS::Core PRIVATE nlohmann_json::nl
 
 add_executable(OpenNuXL src/OpenNuXL.cpp)
 target_link_libraries(OpenNuXL PRIVATE nuxl_backend OpenMS::CLI Boost::regex)
-openms4_install_rpath(OpenNuXL)
-install(TARGETS OpenNuXL RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
-set(manifest "# name\tcategory\tversion\texecutable\nOpenNuXL\t${OpenNuXL_CATEGORY}\t${PROJECT_VERSION}\t${CMAKE_INSTALL_BINDIR}/OpenNuXL${CMAKE_EXECUTABLE_SUFFIX}\n")
-file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/share/openms4/tools)
-file(WRITE ${CMAKE_BINARY_DIR}/share/openms4/tools/nuxl.tools.tsv "${manifest}")
-install(FILES ${CMAKE_BINARY_DIR}/share/openms4/tools/nuxl.tools.tsv DESTINATION share/openms4/tools)
+openms4_install_tools(nuxl "${CMAKE_INSTALL_BINDIR}" ${package_tools})
 
 if(BUILD_TESTING)
-  foreach(kind ini ctd)
-    add_test(NAME OpenNuXL_write_${kind} COMMAND ${Python3_EXECUTABLE}
-      ${CMAKE_CURRENT_SOURCE_DIR}/cmake/CheckToolMetadata.py $<TARGET_FILE:OpenNuXL>
-      OpenNuXL ${PROJECT_VERSION} "${OpenNuXL_CATEGORY}" ${kind}
-      ${CMAKE_CURRENT_BINARY_DIR}/metadata/OpenNuXL.${kind})
-    set_tests_properties(OpenNuXL_write_${kind} PROPERTIES
-      ENVIRONMENT "OPENMS_TOOL_PREFIX_PATH=${CMAKE_BINARY_DIR};OPENMS_DISABLE_UPDATE_CHECK=ON")
-  endforeach()
   foreach(test NuXLFragmentAdductDefinition NuXLModificationsGenerator NuXLParameterParsing NuXLPresets)
     add_executable(${test}_test tests/${test}_test.cpp ${OpenMS_TEST_SUPPORT_SOURCE})
     target_link_libraries(${test}_test PRIVATE nuxl_backend OpenMS::TestFramework)

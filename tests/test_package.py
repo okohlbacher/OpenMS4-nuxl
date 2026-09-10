@@ -28,7 +28,10 @@ class PackageContract(unittest.TestCase):
     def test_only_tool_and_data_are_installed(self):
         cmake = (PACKAGE / 'CMakeLists.txt').read_text()
         installed_targets = re.findall(r'install\(TARGETS\s+(\w+)', cmake)
-        self.assertEqual(installed_targets, ['OpenNuXL'])
+        self.assertEqual(installed_targets, [])
+        self.assertIn('openms4_install_tools(nuxl "${CMAKE_INSTALL_BINDIR}" ${package_tools})', cmake)
+        helper = (PACKAGE / 'cmake/OpenMS4Tools.cmake').read_text()
+        self.assertIn('install(TARGETS ${tool} RUNTIME DESTINATION', helper)
         self.assertNotIn('install(DIRECTORY include', cmake)
         self.assertIn('add_library(nuxl_backend STATIC', cmake)
         for header in (PACKAGE / 'include').rglob('*.h'):
