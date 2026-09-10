@@ -101,7 +101,7 @@ START_SECTION((explicit marker chemistry determines the complete default ion set
     TEST_EQUAL(default_marker_ions_RNA, chemistry == "RNA")
     // No explicit adducts: these ions must come from the selected default set.
     const auto adducts = NuXLParameterParsing::getFeasibleFragmentAdducts(
-      "U", "C9H13N2O9P", {}, {}, true, default_marker_ions_RNA);
+      "U", "C9H13N2O9P", {}, {'U'}, true, default_marker_ions_RNA);
     const auto& expected = chemistry == "RNA" ? rna_formulas : dna_formulas;
     TEST_EQUAL(adducts.marker_ions.size(), expected.size())
     for (const auto& formula : expected)
