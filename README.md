@@ -34,12 +34,9 @@ fixture tests with `OPENMS4_REGRESSION_TESTS=ON`. `tools/ci/run.py` and
 runtime in `results/commands.json`, and check that the executable, the tool
 manifest and the presets are actually installed before packaging.
 
-OpenMS4-cli is public, so its checkout needs no credentials. OpenMS4-test-data is
-not, so the scientific fixture tests depend on an `OPENMS4_TEST_DATA_DEPLOY_KEY`
-secret. Without that key the native jobs still build, test and package the tool,
-and each one raises a warning naming the tests it did not run; the parent
-integration runner covers them in the meantime. The scope is never reduced
-silently.
+Both dependencies are public, so CI needs no credentials: the pinned CLI and
+TestData packages are ordinary checkouts, and the scientific fixture tests run in
+every platform job.
 
 Pushing a `nuxl-v*` tag runs `.github/workflows/release.yml`, which refuses to
 publish unless a successful branch CI run exists for that exact revision, verifies
