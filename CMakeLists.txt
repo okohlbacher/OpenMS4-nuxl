@@ -58,6 +58,14 @@ if(BUILD_TESTING)
   endforeach()
   add_test(NAME NuXL_package_source_contract COMMAND ${Python3_EXECUTABLE}
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_package.py)
+  if(NOT WIN32)
+    # A cask or package manager links the tool into its own bin directory. Presets
+    # must still resolve, so run the build-tree executable through a symlink.
+    add_test(NAME NuXL_presets_through_symlink COMMAND ${CMAKE_COMMAND}
+      -DTOOL=$<TARGET_FILE:OpenNuXL>
+      -DWORK_DIR=${CMAKE_CURRENT_BINARY_DIR}/symlink-test
+      -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/RunThroughSymlink.cmake)
+  endif()
 endif()
 
 option(OPENMS4_REGRESSION_TESTS "Enable numerical tests using installed OpenMSTestData" OFF)

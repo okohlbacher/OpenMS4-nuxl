@@ -28,8 +28,19 @@ namespace OpenMS
         {
           throw std::runtime_error("Cannot locate the NuXL executable directory for presets");
         }
+        std::filesystem::path base = std::filesystem::u8path(executable_directory);
+        // Package managers expose the tool through a symlink in their own bin
+        // directory, and macOS reports the path as invoked rather than the real
+        // one, so the presets would be searched beside the link. Resolve the
+        // executable itself before applying the relative install layout.
+        std::error_code link_error;
+        const auto resolved = std::filesystem::canonical(base / "OpenNuXL", link_error);
+        if (!link_error)
+        {
+          base = resolved.parent_path();
+        }
         const std::filesystem::path path = custom_presets_file.empty()
-          ? std::filesystem::u8path(executable_directory) / NUXL_DATA_FROM_EXECUTABLE / "nuxl_presets.json"
+          ? base / NUXL_DATA_FROM_EXECUTABLE / "nuxl_presets.json"
           : std::filesystem::u8path(custom_presets_file);
         const auto utf8 = path.lexically_normal().generic_u8string();
         const std::string filename(reinterpret_cast<const char*>(utf8.data()), utf8.size());
