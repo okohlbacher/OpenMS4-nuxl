@@ -45,6 +45,9 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       PYTHONUTF8: '1'
       OMP_NUM_THREADS: '1'
+      # OpenMS4-test-data is private. With the key the scientific fixture tests
+      # run; without it the job says so and runs the rest.
+      TEST_DATA_KEY: ${{ secrets.OPENMS4_TEST_DATA_DEPLOY_KEY }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
@@ -54,15 +57,24 @@ jobs:
           repository: okohlbacher/OpenMS4-cli
           ref: c19e49414bcd9ebdea42f89b3f74d2823205892c
           path: dependencies/cli
-          ssh-key: ${{ secrets.OPENMS4_CLI_DEPLOY_KEY }}
           persist-credentials: false
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        if: env.TEST_DATA_KEY != ''
         with:
           repository: okohlbacher/OpenMS4-test-data
           ref: 4a2d15e2fcc8915dcc1acfbea2740ce0b9a1a336
           path: dependencies/test-data
           ssh-key: ${{ secrets.OPENMS4_TEST_DATA_DEPLOY_KEY }}
           persist-credentials: false
+      - name: Select the scientific fixture tests
+        shell: bash
+        run: |
+          if [ -n "$TEST_DATA_KEY" ]; then
+            echo "TEST_DATA_ARG=--test-data-source dependencies/test-data" >> "$GITHUB_ENV"
+          else
+            echo "TEST_DATA_ARG=" >> "$GITHUB_ENV"
+            echo "::warning::OPENMS4_TEST_DATA_DEPLOY_KEY is unset, so the OpenNuXL scientific fixture tests did not run in this job. The parent integration runner still covers them."
+          fi
       - uses: mamba-org/setup-micromamba@f457c30a868e4760d3a6fcea5f25dc655b8edf39 # v3
         with:
           environment-file: tools/ci/environment.yml
@@ -91,8 +103,7 @@ jobs:
           micromamba run -n nuxl-ci python tools/ci/run.py
           --platform ${{ matrix.platform }} --jobs ${{ matrix.jobs }}
           --core-dir "${{ runner.temp }}/core"
-          --cli-source dependencies/cli
-          --test-data-source dependencies/test-data
+          --cli-source dependencies/cli ${{ env.TEST_DATA_ARG }}
           --work-dir "${{ runner.temp }}/nuxl"
       - name: Upload tested OpenNuXL package
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
@@ -135,7 +146,6 @@ jobs:
           repository: okohlbacher/OpenMS4-cli
           ref: c19e49414bcd9ebdea42f89b3f74d2823205892c
           path: dependencies/cli
-          ssh-key: ${{ secrets.OPENMS4_CLI_DEPLOY_KEY }}
           persist-credentials: false
       - name: Install the pinned Core formula
         run: |

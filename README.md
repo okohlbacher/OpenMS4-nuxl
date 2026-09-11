@@ -34,10 +34,12 @@ fixture tests with `OPENMS4_REGRESSION_TESTS=ON`. `tools/ci/run.py` and
 runtime in `results/commands.json`, and check that the executable, the tool
 manifest and the presets are actually installed before packaging.
 
-CI needs two deploy-key secrets, because both dependencies are private
-repositories: `OPENMS4_CLI_DEPLOY_KEY` for OpenMS4-cli and
-`OPENMS4_TEST_DATA_DEPLOY_KEY` for OpenMS4-test-data. Without them the checkout
-steps fail; nothing silently degrades to a smaller test scope.
+OpenMS4-cli is public, so its checkout needs no credentials. OpenMS4-test-data is
+not, so the scientific fixture tests depend on an `OPENMS4_TEST_DATA_DEPLOY_KEY`
+secret. Without that key the native jobs still build, test and package the tool,
+and each one raises a warning naming the tests it did not run; the parent
+integration runner covers them in the meantime. The scope is never reduced
+silently.
 
 Pushing a `nuxl-v*` tag runs `.github/workflows/release.yml`, which refuses to
 publish unless a successful branch CI run exists for that exact revision, verifies
