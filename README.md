@@ -22,6 +22,55 @@ The install contains `bin/OpenNuXL`, `share/openms4/tools/nuxl.tools.tsv`, and `
 
 Three existing class tests move with the backend unchanged apart from removing unused source-tree `test_config.h` includes. A fourth native test checks default/custom preset loading and missing-file rejection. The Core NuXLReport test retains all five mass/sequence cases and uses generic modification definitions as fixture input. The optional package scientific tests search the existing small OpenNuXL fixture with default parameters and a new custom preset name, checking exact localized/unlocalized sequences plus the serialized adduct definition. A missing custom name must return exit 6 with its specific diagnostic. Names are validated after selecting the actual preset file, so custom names are not limited to the bundled list. New custom keys must specify `marker_ions: "RNA"` or `"DNA"`; exact bundled keys in legacy custom files inherit the corresponding bundled setting when the field is absent. Names no longer determine default marker chemistry. Native tests check both complete eight-ion sets and their masses, missing/invalid metadata rejection, and a scientific custom search whose key is `custom-protocol`. See the preset [schema and inherited methionine-loss limitation](share/openms4/nuxl/README.md). Full score/TSV comparisons and fresh-process format round trips remain in the installed TestData suite, including its documented platform conditions.
 
+## Continuous integration, releases and Homebrew
+
+`.github/workflows/nuxl.yml` builds, tests, installs and packages OpenNuXL on
+Linux x64/arm64, macOS x64/arm64 and Windows x64, and builds the two macOS cask
+payloads. Every job downloads the pinned Core SDK release, verifies its checksum,
+then builds the pinned CLI from source and installs it beside Core; the native
+jobs additionally install the pinned OpenMSTestData package and run the scientific
+fixture tests with `OPENMS4_REGRESSION_TESTS=ON`. `tools/ci/run.py` and
+`tools/ci/run_homebrew.py` carry the exact commands, record every command with its
+runtime in `results/commands.json`, and check that the executable, the tool
+manifest and the presets are actually installed before packaging.
+
+CI needs two deploy-key secrets, because both dependencies are private
+repositories: `OPENMS4_CLI_DEPLOY_KEY` for OpenMS4-cli and
+`OPENMS4_TEST_DATA_DEPLOY_KEY` for OpenMS4-test-data. Without them the checkout
+steps fail; nothing silently degrades to a smaller test scope.
+
+Pushing a `nuxl-v*` tag runs `.github/workflows/release.yml`, which refuses to
+publish unless a successful branch CI run exists for that exact revision, verifies
+all seven checksums, and then republishes those tested archives as a prerelease.
+
+On macOS the tool installs from the repository tap:
+
+```sh
+brew trust --formula okohlbacher/openms4-core/openms4-core
+brew trust --cask okohlbacher/openms4-nuxl/openms4-nuxl
+brew tap okohlbacher/openms4-core https://github.com/okohlbacher/OpenMS4-core
+brew tap okohlbacher/openms4-nuxl https://github.com/okohlbacher/OpenMS4-nuxl
+brew install --cask okohlbacher/openms4-nuxl/openms4-nuxl
+```
+
+Trust both packages before tapping: recent Homebrew refuses to read an untrusted
+tap, so a `brew tap` that precedes its trust step fails outright. The cask payload
+carries the CLI runtime, the presets and the tool manifest, and depends on the
+`openms4-core` formula for the SDK itself. `brew` downloads release assets
+anonymously, so cask installs require the release assets of this repository to be
+publicly readable.
+
+`Casks/openms4-nuxl.rb` is generated from a published release rather than written
+by hand, so its checksums always describe assets that exist:
+
+```sh
+python3 tools/ci/update_cask.py --tag nuxl-v1.0.0-ci.1
+```
+
+Commit the generated cask; `.github/workflows/homebrew-cask.yml` then installs it
+on both macOS architectures, runs `OpenNuXL --help` and `-write_ini`, and
+uninstalls it again.
+
 Run the build-free ownership checks independently with:
 
 ```sh

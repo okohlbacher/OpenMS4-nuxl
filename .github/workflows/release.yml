@@ -1,0 +1,42 @@
+name: Release NuXL
+
+on:
+  push:
+    tags: ['nuxl-v*']
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Download packages from successful branch CI
+        run: |
+          set -euo pipefail
+          revision=$(git rev-parse HEAD)
+          run_id=$(gh run list --workflow nuxl.yml --commit "$revision" --event push \
+            --status success --limit 1 --json databaseId --jq '.[0].databaseId // empty')
+          if [ -z "$run_id" ]; then
+            echo "::error::No successful NuXL branch CI run exists for $revision"
+            exit 1
+          fi
+          gh run download "$run_id" --pattern 'nuxl-*' --pattern 'cask-*' --dir artifacts
+          test "$(find artifacts -name '*.sha256' | wc -l)" -eq 7
+          find artifacts -name '*.sha256' -print0 | while IFS= read -r -d '' checksum; do
+            sed -i 's/\r$//' "$checksum"
+            (cd "$(dirname "$checksum")" && shasum -a 256 -c "$(basename "$checksum")")
+          done
+      - name: Publish tested packages
+        run: |
+          gh release create "${{ github.ref_name }}" \
+            ./artifacts/nuxl-*/* ./artifacts/cask-*/* \
+            --verify-tag --prerelease --title "NuXL ${{ github.ref_name }}" \
+            --notes "Tested OpenNuXL packages for Linux x64/arm64, macOS x64/arm64 and Windows x64, plus Homebrew cask payloads for both macOS architectures. Each payload carries the CLI runtime, the NuXL presets and the tool manifest, and requires the pinned openms4-core SDK."
