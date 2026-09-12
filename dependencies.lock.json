@@ -8,7 +8,7 @@
     },
     "OpenMSCLI": {
       "version": "1.0.0",
-      "source_revision": "9ea7e4c1918e01b5c05b8f2b4f87c266b6f4cb08",
+      "source_revision": "7a30e66632662d8c404c9c8805b451880ae5a6a1",
       "repository": "https://github.com/okohlbacher/OpenMS4-cli"
     },
     "OpenMSTestData": {
