@@ -25,7 +25,7 @@ jobs:
           run_id=$(gh run list --workflow nuxl.yml --commit "$revision" --event push \
             --status success --limit 1 --json databaseId --jq '.[0].databaseId // empty')
           if [ -z "$run_id" ]; then
-            echo "::error::No successful NuXL branch CI run exists for $revision"
+            echo "::error::No successful branch CI run exists for $revision"
             exit 1
           fi
           gh run download "$run_id" --pattern 'nuxl-*' --pattern 'cask-*' --dir artifacts
@@ -39,4 +39,4 @@ jobs:
           gh release create "${{ github.ref_name }}" \
             ./artifacts/nuxl-*/* ./artifacts/cask-*/* \
             --verify-tag --prerelease --title "NuXL ${{ github.ref_name }}" \
-            --notes "Tested OpenNuXL packages for Linux x64/arm64, macOS x64/arm64 and Windows x64, plus Homebrew cask payloads for both macOS architectures. Each payload carries the CLI runtime, the NuXL presets and the tool manifest, and requires the pinned openms4-core SDK."
+            --notes "Tested packages for Linux x64/arm64, macOS x64/arm64 and Windows x64, plus Homebrew cask payloads for both macOS architectures. Each payload carries the CLI runtime and this package's tool manifest, and requires the pinned openms4-core SDK."

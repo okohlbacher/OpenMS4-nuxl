@@ -5,7 +5,6 @@ on:
     branches: ['**']
     paths:
       - 'Casks/**'
-      - '.github/workflows/homebrew-cask.yml'
   workflow_dispatch:
 
 permissions:
@@ -38,7 +37,6 @@ jobs:
           brew tap okohlbacher/openms4-core https://github.com/okohlbacher/OpenMS4-core
           brew tap okohlbacher/openms4-nuxl https://github.com/okohlbacher/OpenMS4-nuxl
           brew install --cask okohlbacher/openms4-nuxl/openms4-nuxl
-          OpenNuXL --help
-          OpenNuXL -write_ini "$RUNNER_TEMP/installed.ini"
-          test -s "$RUNNER_TEMP/installed.ini"
+          OpenNuXL -write_ini "$RUNNER_TEMP/OpenNuXL.ini"
+          test -s "$RUNNER_TEMP/OpenNuXL.ini"
           brew uninstall --cask openms4-nuxl
