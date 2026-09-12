@@ -1,9 +1,9 @@
 cask "openms4-nuxl" do
   arch arm: "arm64", intel: "x64"
 
-  version "1.0.0-ci.1,a2a0f7d01719"
-  sha256 arm:   "303ea1f6f7f14c43234f8c92f9f323d9f2d2e5725742285027e4e912716c153e",
-         intel: "dcca41a28b20afe2968a13c1f6ba6c873f9d13e894b306a397dc3991beb108de"
+  version "1.0.0-ci.2,dc6f61c5ed8a"
+  sha256 arm:   "1638ed1338ed4ab8fd9fb0d194dfd735a01391e87228329cbc783e9f68ff3de0",
+         intel: "f596a037e82279b3ff36d8373cbd26c08f23c255ec585aed94ed576e34f6940f"
 
   url "https://github.com/okohlbacher/OpenMS4-nuxl/releases/download/" \
       "nuxl-v#{version.csv.first}/OpenMS4-nuxl-macos-#{arch}-Homebrew-#{version.csv.second}.tar.gz"
