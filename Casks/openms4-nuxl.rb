@@ -11,6 +11,9 @@ cask "openms4-nuxl" do
   desc "Search engine for protein-nucleic acid cross-links, built against the OpenMS Core SDK"
   homepage "https://github.com/okohlbacher/OpenMS4-nuxl"
 
+  disable! date:    "2026-09-14",
+           because: "was built against openms4-core 4.0.0-ci.2, and the tap now serves a binary-incompatible newer Core"
+
   depends_on formula: "okohlbacher/openms4-core/openms4-core"
   depends_on macos: :sequoia
 
