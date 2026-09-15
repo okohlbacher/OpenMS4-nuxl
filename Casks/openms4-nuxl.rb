@@ -1,9 +1,9 @@
 cask "openms4-nuxl" do
   arch arm: "arm64", intel: "x64"
 
-  version "1.0.0-ci.2,dc6f61c5ed8a"
-  sha256 arm:   "1638ed1338ed4ab8fd9fb0d194dfd735a01391e87228329cbc783e9f68ff3de0",
-         intel: "f596a037e82279b3ff36d8373cbd26c08f23c255ec585aed94ed576e34f6940f"
+  version "1.0.0-ci.3,d3038ba1a222"
+  sha256 arm:   "1533a3c45447cc46608fba4a710dedf42ac388425b2b05fddb3fddbc2dc6b595",
+         intel: "eadfe4c8bd55b20a5d2309408e96a61fa6daff2f4d1ad5f874f6db721cdbe416"
 
   url "https://github.com/okohlbacher/OpenMS4-nuxl/releases/download/" \
       "nuxl-v#{version.csv.first}/OpenMS4-nuxl-macos-#{arch}-Homebrew-#{version.csv.second}.tar.gz"
@@ -11,14 +11,22 @@ cask "openms4-nuxl" do
   desc "Search engine for protein-nucleic acid cross-links, built against the OpenMS Core SDK"
   homepage "https://github.com/okohlbacher/OpenMS4-nuxl"
 
-  disable! date:    "2026-09-14",
-           because: "was built against openms4-core 4.0.0-ci.2, and the tap now serves a binary-incompatible newer Core"
-
   depends_on formula: "okohlbacher/openms4-core/openms4-core"
   depends_on macos: :sequoia
 
   payload = "OpenMS4-nuxl-macos-#{arch}-Homebrew-#{version.csv.second}"
   binary "#{payload}/bin/OpenNuXL"
+
+  # libOpenMS has no versioned name, so a payload only runs with the Core it was built against.
+  preflight do
+    config = "#{HOMEBREW_PREFIX}/opt/openms4-core/lib/cmake/OpenMS/OpenMSConfig.cmake"
+    core = File.exist?(config) ? File.read(config)[/set\(OpenMS_SOURCE_REVISION "([0-9a-f]{40})"\)/, 1] : nil
+    next if core == "ac41cc177023e24a8fbc711a6ce9010187c54c44"
+
+    raise Cask::CaskError, "openms4-nuxl #{version.csv.first} was built against openms4-core ac41cc177023, " \
+                           "but the installed openms4-core is #{core&.slice(0, 12) || "unknown"}. " \
+                           "Install the openms4-nuxl release built for the installed Core."
+  end
 
   postflight_steps do
     run "/usr/bin/xattr",
