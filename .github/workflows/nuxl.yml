@@ -49,7 +49,7 @@ jobs:
             jobs: 4
           - platform: windows-x64
             runner: windows-2022
-            pool: flashbox-windows-x64
+            pool: ''
             packages: glpk=5.*
             jobs: 4
     env:
@@ -63,7 +63,7 @@ jobs:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           repository: okohlbacher/OpenMS4-cli
-          ref: 41ac1eb0b374ab2150e79cae62175a83cb99308a
+          ref: b65ece7fd5a72b02b87cc18432d917c60b2b4282
           path: dependencies/cli
           persist-credentials: false
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
@@ -145,7 +145,7 @@ jobs:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           repository: okohlbacher/OpenMS4-cli
-          ref: 41ac1eb0b374ab2150e79cae62175a83cb99308a
+          ref: b65ece7fd5a72b02b87cc18432d917c60b2b4282
           path: dependencies/cli
           persist-credentials: false
       - name: Install the pinned Core formula
