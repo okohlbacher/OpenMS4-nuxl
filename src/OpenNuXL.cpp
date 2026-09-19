@@ -4093,7 +4093,7 @@ static void scoreXLIons_(
     omp_set_lock(&(annotated_hits_lock));
   #endif
     {
-      annotated_hits.emplace_back(move(ah));
+      annotated_hits.emplace_back(std::move(ah));
 
       // prevent vector from growing indefinitly (memory) but don't shrink the vector every time
       if (annotated_hits.size() >= 2 * report_top_hits)
@@ -5670,7 +5670,7 @@ static void scoreXLIons_(
                     omp_set_lock(&(annotated_peptides_lock[scan_index]));
   #endif
                     {
-                      annotated_peptides[scan_index].emplace_back(move(ah));
+                      annotated_peptides[scan_index].emplace_back(std::move(ah));
 
                       // prevent vector from growing indefinitly (memory) but don't shrink the vector every time
                       if (annotated_peptides[scan_index].size() >= 2 * report_top_hits)
@@ -5922,7 +5922,7 @@ static void scoreXLIons_(
                       omp_set_lock(&(annotated_XLs_lock[scan_index]));
   #endif
                       {
-                        annotated_XLs[scan_index].emplace_back(move(ah));
+                        annotated_XLs[scan_index].emplace_back(std::move(ah));
 
                         // prevent vector from growing indefinitely (memory) but don't shrink the vector every time
                         if (annotated_XLs[scan_index].size() >= 2 * report_top_hits)
