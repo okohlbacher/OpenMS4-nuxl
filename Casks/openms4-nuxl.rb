@@ -1,9 +1,9 @@
 cask "openms4-nuxl" do
   arch arm: "arm64", intel: "x64"
 
-  version "1.0.0-ci.5,77c129b72746"
-  sha256 arm:   "70a47371c102cc4c6b172541255249b02a46254383ad172e42c1b9224ef44c9c",
-         intel: "6b705633f4906edd03ccb94877bbf3d6c764025a4903051f970877ba0bf89ce5"
+  version "1.0.0-ci.6,3f8c36ebd88f"
+  sha256 arm:   "d03794e5f67890af84e00807e07d34bdf0f5bf2e8035b562b9084d0a8155570e",
+         intel: "6049837eb27cbff57edc9a84fa779162486fd78603cbb03750ff69f53f575b91"
 
   url "https://github.com/okohlbacher/OpenMS4-nuxl/releases/download/" \
       "nuxl-v#{version.csv.first}/OpenMS4-nuxl-macos-#{arch}-Homebrew-#{version.csv.second}.tar.gz"
@@ -21,9 +21,9 @@ cask "openms4-nuxl" do
   preflight do
     config = "#{HOMEBREW_PREFIX}/opt/openms4-core/lib/cmake/OpenMS/OpenMSConfig.cmake"
     core = File.exist?(config) ? File.read(config)[/set\(OpenMS_SOURCE_REVISION "([0-9a-f]{40})"\)/, 1] : nil
-    next if core == "eb58e981d7e0864634b59230874a56a1512369f7"
+    next if core == "7d90cec8718d28518527acc10b495550f106de26"
 
-    raise Cask::CaskError, "openms4-nuxl #{version.csv.first} was built against openms4-core eb58e981d7e0, " \
+    raise Cask::CaskError, "openms4-nuxl #{version.csv.first} was built against openms4-core 7d90cec8718d, " \
                            "but the installed openms4-core is #{core&.slice(0, 12) || "unknown"}. " \
                            "Install the openms4-nuxl release built for the installed Core."
   end
