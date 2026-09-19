@@ -8,6 +8,7 @@
 
 #include <OpenMS/ANALYSIS/NUXL/NuXLPresets.h>
 #include <OpenMS/SYSTEM/File.h>
+#include <OpenMS/SYSTEM/PathUtils.h>
 #include <NuXLDataPath.h>
 #include <nlohmann/json.hpp>
 #include <filesystem>
@@ -28,7 +29,7 @@ namespace OpenMS
         {
           throw std::runtime_error("Cannot locate the NuXL executable directory for presets");
         }
-        std::filesystem::path base = std::filesystem::u8path(executable_directory);
+        std::filesystem::path base = OpenMS::to_path(executable_directory);
         // Package managers expose the tool through a symlink in their own bin
         // directory, and macOS reports the path as invoked rather than the real
         // one, so the presets would be searched beside the link. Resolve the
@@ -41,7 +42,7 @@ namespace OpenMS
         }
         const std::filesystem::path path = custom_presets_file.empty()
           ? base / NUXL_DATA_FROM_EXECUTABLE / "nuxl_presets.json"
-          : std::filesystem::u8path(custom_presets_file);
+          : OpenMS::to_path(custom_presets_file);
         const auto utf8 = path.lexically_normal().generic_u8string();
         const std::string filename(reinterpret_cast<const char*>(utf8.data()), utf8.size());
         if (!std::filesystem::is_regular_file(path))
@@ -68,7 +69,7 @@ namespace OpenMS
       {
         try
         {
-          std::ifstream file{std::filesystem::u8path(json_path)};
+          std::ifstream file{OpenMS::to_path(json_path)};
           json j;
           file >> j;
           
@@ -119,7 +120,7 @@ namespace OpenMS
       {
         try
         {
-          std::ifstream file{std::filesystem::u8path(json_path)};
+          std::ifstream file{OpenMS::to_path(json_path)};
           json j;
           file >> j;
           
@@ -133,7 +134,7 @@ namespace OpenMS
             json marker_ions = preset.value("marker_ions", json());
             if (marker_ions.is_null() && !custom_presets_file.empty() && !preset.contains("marker_ions"))
             {
-              std::ifstream bundled_file{std::filesystem::u8path(presetsPath(""))};
+              std::ifstream bundled_file{OpenMS::to_path(presetsPath(""))};
               json bundled;
               bundled_file >> bundled;
               if (bundled.contains(p))
